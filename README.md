@@ -1,5 +1,5 @@
 <p align="center">
- <img src="raccoon.gif" alt="Raccoon"/>
+ <img src="raccoon.svg" width="300" alt="Raccoon"/>
 </p>
 
 # 🦝 raccoon
