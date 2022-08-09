@@ -6,7 +6,9 @@
   "author": "pilotpirxie <10637666+pilotpirxie@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^18.6.3"
+    "@redis/time-series": "^1.0.3",
+    "@types/node": "^18.6.3",
+    "redis": "^4.2.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.32.0",
