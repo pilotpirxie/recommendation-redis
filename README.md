@@ -3,17 +3,21 @@
 </p>
 
 # 🦝 raccoon
-Simple and open source recommendation system based on time-series data and statistical analysis. Written in TypeScript and Node.js using QuestDB for storage.
+Simple and open source recommendation system based on time-series data and statistical analysis. Written in TypeScript and Node.js using Redis for storage.
 
 ### Features
 * Use tag score and Jaccard index
-* Content and context based filtering
+* Content based filtering
 * Event-driven powered engine
 * Suitable for product and content recommendation
 * Fine-tuning of tag weights
 * GPU accelerated with gpu.js
 * Minimalist and lightweight
 * Written in TypeScript and Node.js
+
+<p style="text-align: center;" align="center">
+ <img src="architecture.png" style="max-width: 100%;" width="600" alt="Raccoon Architecture"/>
+</p>
 
 ### Getting started
 ```sh
@@ -45,7 +49,7 @@ DELETE /api/actors/:actorId
 
 Replace specific actor
 ```
-PATCH /api/actors/:actorId
+PUT /api/actors/:actorId
 ```
 
 Add new event to an actor
@@ -75,7 +79,7 @@ DELETE /api/items/:itemId
 
 Replace specific item
 ```
-PATCH /api/items/:itemId
+PUT /api/items/:itemId
 ```
 
 ### License
