@@ -2,7 +2,7 @@
  <img src="raccoon2.png" style="max-width: 100%;" width="600" alt="Raccoon"/>
 </p>
 
-# 🦝 raccoon
+# 🦝 recommendation
 Simple and open source recommendation system based on time-series data and statistical analysis. Written in TypeScript and Node.js using Redis for storage.
 
 ### Features
