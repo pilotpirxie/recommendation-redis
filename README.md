@@ -1,9 +1,9 @@
 <p style="text-align: center;" align="center">
- <img src="raccoon2.png" style="max-width: 100%;" width="600" alt="Raccoon"/>
+ <img src="logo.png" style="max-width: 100%;" width="300" alt="Recommendation"/>
 </p>
 
-# 🦝 recommendation
-Simple and open source recommendation system based on time-series data and statistical analysis. Written in TypeScript and Node.js using Redis for storage.
+# recommendation
+Open source recommendation system based on time-series data and statistical analysis. Written in TypeScript and Node.js using Redis for storage.
 
 ### Features
 * Use tag score and Jaccard index
@@ -16,7 +16,7 @@ Simple and open source recommendation system based on time-series data and stati
 * Written in TypeScript and Node.js
 
 <p style="text-align: center;" align="center">
- <img src="architecture.png" style="max-width: 100%;" width="600" alt="Raccoon Architecture"/>
+ <img src="architecture.png" style="max-width: 100%;" width="500" alt="Recommendation Architecture"/>
 </p>
 
 ### Getting started

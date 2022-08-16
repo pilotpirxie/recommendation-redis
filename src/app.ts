@@ -1,9 +1,11 @@
 import { createClient } from 'redis';
 
-const client = createClient();
+const client = createClient({
+  password: 'mysecretpassword',
+});
 
 (async () => {
-// eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
   client.on('error', (err) => console.log('Redis Error', err));
 
   await client.connect();
