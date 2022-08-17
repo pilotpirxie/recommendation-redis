@@ -10,9 +10,17 @@ const client = createClient({
 
   await client.connect();
 
-  await client.set('key', 'value');
-  const value = await client.get('key');
+  for (let i = 0; i < 50000000; i++) {
+    if (i % 1000 === 0) {
+      // eslint-disable-next-line no-console
+      console.log(i);
+      await client.set(`bkey${i}`, Math.random() * 100000000);
+    } else {
+      client.set(`bkey${i}`, Math.random() * 100000000);
+    }
 
-  // eslint-disable-next-line no-console
-  console.log(value);
+    // const value = await client.get(`akey${i}`);
+    // // eslint-disable-next-line no-console
+    // console.log(value);
+  }
 })();

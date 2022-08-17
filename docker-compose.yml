@@ -2,7 +2,17 @@ version: '3.9'
 
 services:
   redis:
-    image: redis:7
+    image: redislabs/redistimeseries:latest
     ports:
       - 6379:6379
     command: redis-server --save 60 1 --requirepass mysecretpassword --loglevel warning
+    volumes:
+      - ./.docker/redis:/data
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    ports:
+      - '8001:8001'
+    volumes:
+      - ./.docker/redisinsight:/db 
+    depends_on:
+      - redis
