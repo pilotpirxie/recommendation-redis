@@ -10,17 +10,18 @@ const client = createClient({
 
   await client.connect();
 
-  for (let i = 0; i < 50000000; i++) {
-    if (i % 1000 === 0) {
-      // eslint-disable-next-line no-console
-      console.log(i);
-      await client.set(`bkey${i}`, Math.random() * 100000000);
-    } else {
-      client.set(`bkey${i}`, Math.random() * 100000000);
-    }
+  // for (let i = 0; i < 1000; i++) {
+  //   if (i % 100000 === 0) {
+  //     // eslint-disable-next-line no-console
+  //     console.log(i);
+  //     await client.set(`bkey${i}`, Math.random() * 100000000);
+  //   } else {
+  //     client.set(`bkey${i}`, Math.random() * 100000000);
+  //   }
+  // }
 
-    // const value = await client.get(`akey${i}`);
-    // // eslint-disable-next-line no-console
-    // console.log(value);
+  for await (const key of client.scanIterator({ MATCH: 'bkey5?' })) {
+    const v = await client.get(key);
+    console.log(key, v);
   }
 })();
