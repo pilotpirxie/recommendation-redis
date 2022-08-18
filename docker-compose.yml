@@ -8,11 +8,3 @@ services:
     command: redis-server --save 60 1 --requirepass mysecretpassword --loglevel warning
     volumes:
       - ./.docker/redis:/data
-  redisinsight:
-    image: redislabs/redisinsight:latest
-    ports:
-      - '8001:8001'
-    volumes:
-      - ./.docker/redisinsight:/db 
-    depends_on:
-      - redis
