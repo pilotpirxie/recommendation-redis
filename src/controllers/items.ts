@@ -10,7 +10,7 @@ export function initializeItemsController(dataStorage: DataStorage): Router {
 
   const addOrReplaceItemSchema = {
     body: {
-      externalId: Joi.string().required(),
+      itemId: Joi.string().required(),
       tags: Joi.array().items(Joi.string()).required(),
     },
   };
@@ -18,10 +18,34 @@ export function initializeItemsController(dataStorage: DataStorage): Router {
   router.post('/', validation(addOrReplaceItemSchema), async (req: TypedRequest<typeof addOrReplaceItemSchema>, res, next) => {
     try {
       await dataStorage.setItem({
-        externalId: req.body.externalId,
+        itemId: req.body.itemId,
         tags: req.body.tags,
       });
       return res.sendStatus(200);
+    } catch (e) {
+      return next(e);
+    }
+  });
+
+  const deleteItemSchema = {
+    params: {
+      itemId: Joi.string().required(),
+    },
+  };
+
+  router.delete('/:itemId', validation(deleteItemSchema), async (req: TypedRequest<typeof deleteItemSchema>, res, next) => {
+    try {
+      await dataStorage.deleteItem(req.params.itemId);
+      return res.sendStatus(200);
+    } catch (e) {
+      return next(e);
+    }
+  });
+
+  router.get('/:itemId', validation(deleteItemSchema), async (req: TypedRequest<typeof deleteItemSchema>, res, next) => {
+    try {
+      const item = await dataStorage.getItem(req.params.itemId);
+      return res.json(item);
     } catch (e) {
       return next(e);
     }

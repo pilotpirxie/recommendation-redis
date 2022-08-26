@@ -1,4 +1,4 @@
 export type Item = {
-    externalId: string;
+    itemId: string;
     tags: string[];
 }

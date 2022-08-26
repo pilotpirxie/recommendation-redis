@@ -12,9 +12,9 @@ export class RedisStorage implements DataStorage {
 
   async getItem(id: string): Promise<Item|null> {
     const tags = await this.redis.sMembers(`items:${id}`);
-    if (!tags) return null;
+    if (!tags.length) return null;
     return {
-      externalId: id,
+      itemId: id,
       tags,
     };
   }
@@ -24,16 +24,16 @@ export class RedisStorage implements DataStorage {
   }
 
   async setItem(item: Item): Promise<void> {
-    const exists = await this.redis.exists(`items:${item.externalId}`);
-    if (exists) await this.redis.del(`items:${item.externalId}`);
-    await this.redis.sAdd(`items:${item.externalId}`, item.tags);
+    const exists = await this.redis.exists(`items:${item.itemId}`);
+    if (exists) await this.redis.del(`items:${item.itemId}`);
+    await this.redis.sAdd(`items:${item.itemId}`, item.tags);
   }
 
   async getActor(id: string): Promise<Actor | null> {
     const date = await this.redis.get(`actor:${id}`);
-    if (!date) return null;
+    if (!date?.length) return null;
     return {
-      externalId: id,
+      itemId: id,
     };
   }
 
@@ -42,8 +42,8 @@ export class RedisStorage implements DataStorage {
   }
 
   async setActor(actor: Actor): Promise<void> {
-    const exists = await this.redis.exists(`items:${actor.externalId}`);
-    if (exists) await this.redis.del(`items:${actor.externalId}`);
-    await this.redis.set(`actor:${actor.externalId}`, Date.now());
+    const exists = await this.redis.exists(`items:${actor.itemId}`);
+    if (exists) await this.redis.del(`items:${actor.itemId}`);
+    await this.redis.set(`actor:${actor.itemId}`, Date.now());
   }
 }
