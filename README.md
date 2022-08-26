@@ -30,6 +30,9 @@ yarn start
 Add new actor
 ```
 POST /api/actors
+{
+    "externalId": "string"
+}
 ```
 
 Get specific actor by actorId
@@ -50,11 +53,18 @@ DELETE /api/actors/:actorId
 Replace specific actor
 ```
 PUT /api/actors/:actorId
+{
+    "externalId": "string"
+}
 ```
 
 Add new event to an actor
 ```
 POST /api/actors/:actorId/events
+{
+    "tag": "string",
+    "score": 3
+}
 ```
 
 Delete specific actor event by eventId
@@ -65,6 +75,10 @@ DELETE /api/actors/:actorId/events/:eventId
 Add new item
 ```
 POST /api/items
+{
+    "externalId": "string",
+    "tags": ["tag1", "tag2", "..."]
+}
 ```
 
 Get specific item by itemId
@@ -80,6 +94,10 @@ DELETE /api/items/:itemId
 Replace specific item
 ```
 PUT /api/items/:itemId
+{
+    "externalId": "string",
+    "tags": ["tag1", "tag2", "..."]
+}
 ```
 
 ### License
