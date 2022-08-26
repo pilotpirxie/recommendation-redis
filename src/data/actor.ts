@@ -1,3 +1,3 @@
 export type Actor = {
-    itemId: string;
+    actorId: string;
 }

@@ -11,7 +11,6 @@ Open source recommendation system based on time-series data and statistical anal
 * Event-driven powered engine
 * Suitable for product and content recommendation
 * Fine-tuning of tag weights
-* GPU accelerated with gpu.js
 * Minimalist and lightweight
 * Written in TypeScript and Node.js
 

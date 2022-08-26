@@ -27,13 +27,13 @@ export function initializeItemsController(dataStorage: DataStorage): Router {
     }
   });
 
-  const deleteItemSchema = {
+  const deleteOrGetItemSchema = {
     params: {
       itemId: Joi.string().required(),
     },
   };
 
-  router.delete('/:itemId', validation(deleteItemSchema), async (req: TypedRequest<typeof deleteItemSchema>, res, next) => {
+  router.delete('/:itemId', validation(deleteOrGetItemSchema), async (req: TypedRequest<typeof deleteOrGetItemSchema>, res, next) => {
     try {
       await dataStorage.deleteItem(req.params.itemId);
       return res.sendStatus(200);
@@ -42,7 +42,7 @@ export function initializeItemsController(dataStorage: DataStorage): Router {
     }
   });
 
-  router.get('/:itemId', validation(deleteItemSchema), async (req: TypedRequest<typeof deleteItemSchema>, res, next) => {
+  router.get('/:itemId', validation(deleteOrGetItemSchema), async (req: TypedRequest<typeof deleteOrGetItemSchema>, res, next) => {
     try {
       const item = await dataStorage.getItem(req.params.itemId);
       return res.json(item);

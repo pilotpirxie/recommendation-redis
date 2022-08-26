@@ -33,7 +33,7 @@ export class RedisStorage implements DataStorage {
     const date = await this.redis.get(`actor:${id}`);
     if (!date?.length) return null;
     return {
-      itemId: id,
+      actorId: id,
     };
   }
 
@@ -42,8 +42,8 @@ export class RedisStorage implements DataStorage {
   }
 
   async setActor(actor: Actor): Promise<void> {
-    const exists = await this.redis.exists(`items:${actor.itemId}`);
-    if (exists) await this.redis.del(`items:${actor.itemId}`);
-    await this.redis.set(`actor:${actor.itemId}`, Date.now());
+    const exists = await this.redis.exists(`items:${actor.actorId}`);
+    if (exists) await this.redis.del(`items:${actor.actorId}`);
+    await this.redis.set(`actor:${actor.actorId}`, Date.now());
   }
 }
