@@ -8,20 +8,20 @@ import { DataStorage } from '../data/dataStorage';
 export function initializeItemsController(dataStorage: DataStorage): Router {
   const router = Router();
 
-  const addItemSchema = {
+  const addOrReplaceItemSchema = {
     body: {
       externalId: Joi.string().required(),
       tags: Joi.array().items(Joi.string()).required(),
     },
   };
 
-  router.post('/', validation(addItemSchema), async (req: TypedRequest<typeof addItemSchema>, res, next) => {
+  router.post('/', validation(addOrReplaceItemSchema), async (req: TypedRequest<typeof addOrReplaceItemSchema>, res, next) => {
     try {
-      const status = await dataStorage.addItem({
+      await dataStorage.setItem({
         externalId: req.body.externalId,
         tags: req.body.tags,
       });
-      return res.sendStatus(status ? 200 : 409);
+      return res.sendStatus(200);
     } catch (e) {
       return next(e);
     }

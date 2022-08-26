@@ -11,53 +11,39 @@ export class RedisStorage implements DataStorage {
   }
 
   async getItem(id: string): Promise<Item|null> {
-    const tags = await this.redis.hGet(`items:${id}`, 'tags');
-    if (tags) {
-      return {
-        externalId: id,
-        tags: tags.split(','),
-      };
-    }
-    return null;
+    const tags = await this.redis.sMembers(`items:${id}`);
+    if (!tags) return null;
+    return {
+      externalId: id,
+      tags,
+    };
   }
 
   async deleteItem(id: string): Promise<void> {
     await this.redis.del(`items:${id}`);
   }
 
-  async replaceItem(item: Item): Promise<void> {
-    await this.redis.hSet(`items:${item.externalId}`, 'tags', item.tags.join(','));
-  }
-
-  async addItem(item: Item): Promise<boolean> {
+  async setItem(item: Item): Promise<void> {
     const exists = await this.redis.exists(`items:${item.externalId}`);
-    if (exists) return false;
-    await this.redis.hSet(`items:${item.externalId}`, 'tags', item.tags.join(','));
-    return true;
+    if (exists) await this.redis.del(`items:${item.externalId}`);
+    await this.redis.sAdd(`items:${item.externalId}`, item.tags);
   }
 
   async getActor(id: string): Promise<Actor | null> {
-    const date = await this.redis.hGet(`actor:${id}`, 'date');
-    if (date) {
-      return {
-        externalId: id,
-      };
-    }
-    return null;
+    const date = await this.redis.get(`actor:${id}`);
+    if (!date) return null;
+    return {
+      externalId: id,
+    };
   }
 
   async deleteActor(id: string): Promise<void> {
     await this.redis.del(`actor:${id}`);
   }
 
-  async replaceActor(actor: Actor): Promise<void> {
-    await this.redis.hSet(`actor:${actor.externalId}`, 'date', Date.now());
-  }
-
-  async addActor(actor: Actor): Promise<boolean> {
-    const exists = await this.redis.exists(`actor:${actor.externalId}`);
-    if (exists) return false;
-    await this.redis.hSet(`actor:${actor.externalId}`, 'date', Date.now());
-    return true;
+  async setActor(actor: Actor): Promise<void> {
+    const exists = await this.redis.exists(`items:${actor.externalId}`);
+    if (exists) await this.redis.del(`items:${actor.externalId}`);
+    await this.redis.set(`actor:${actor.externalId}`, Date.now());
   }
 }
