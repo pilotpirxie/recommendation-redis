@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import bodyParser from 'body-parser';
 import { errorHandler } from './middlewares/errors';
-import itemsController from './controllers/items.controller';
+import { initializeItemsController } from './controllers/items';
 
 dotenv.config();
 const port = process.env.PORT || 3000;
@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/resources', itemsController);
+app.use('/api/items', initializeItemsController());
 
 app.use(errorHandler);
 
