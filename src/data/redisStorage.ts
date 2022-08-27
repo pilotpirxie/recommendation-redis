@@ -1,3 +1,4 @@
+import 'dotenv';
 import { RedisClientType } from 'redis';
 import { DataStorage } from './dataStorage';
 import { Item } from '../domain/item';
@@ -33,6 +34,10 @@ export class RedisStorage implements DataStorage {
         itemId: key.split(':')[1],
         tags,
       });
+
+      if (items.length >= Number(process.env.ITEMS_LIMIT)) {
+        break;
+      }
     }
 
     return items;
@@ -68,6 +73,10 @@ export class RedisStorage implements DataStorage {
         expireAt: Number(ts) + (Number(ttl) * 1000),
         createdAt: Number(ts),
       });
+
+      if (events.length >= Number(process.env.EVENTS_LIMIT)) {
+        break;
+      }
     }
 
     return {
