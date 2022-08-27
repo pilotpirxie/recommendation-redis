@@ -5,8 +5,9 @@ import bodyParser from 'body-parser';
 import { createClient, RedisClientType } from 'redis';
 import { errorHandler } from './middlewares/errors';
 import { initializeItemsController } from './controllers/items';
-import { RedisStorage } from './data/redisStorage';
+import { RedisStorage } from './storage/redisStorage';
 import { initializeActorsController } from './controllers/actors';
+import { JaccardIndexTags } from './services/jaccardIndexTags';
 
 dotenv.config();
 const port = process.env.PORT || 3000;
@@ -39,9 +40,10 @@ if (!redis) {
 }
 
 const redisStorage = new RedisStorage(redis as RedisClientType);
+const recommendation = new JaccardIndexTags();
 
 app.use('/api/items', initializeItemsController(redisStorage));
-app.use('/api/actors', initializeActorsController(redisStorage));
+app.use('/api/actors', initializeActorsController(redisStorage, recommendation));
 
 app.use(errorHandler);
 

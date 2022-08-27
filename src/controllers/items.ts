@@ -3,7 +3,7 @@ import { Router } from 'express';
 import Joi from 'joi';
 import { TypedRequest } from '../types/express';
 import validation from '../middlewares/validation';
-import { DataStorage } from '../data/dataStorage';
+import { DataStorage } from '../storage/dataStorage';
 
 export function initializeItemsController(dataStorage: DataStorage): Router {
   const router = Router();

@@ -30,5 +30,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'no-plusplus': 'off',
     'no-restricted-syntax': 'off',
+    'class-methods-use-this': 'off',
   },
 };

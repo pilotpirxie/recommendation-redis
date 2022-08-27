@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="fZ8Qev84_Ls7JMcuUMex" name="Strona-1">
-        <mxGraphModel dx="1922" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="668" dy="532" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -55,10 +55,10 @@
                 <mxCell id="r0pruG9ZnMZQPcUSS0aJ-19" value="" style="sketch=0;aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/mscae/Cache_Redis_Product.svg;" parent="1" vertex="1">
                     <mxGeometry x="560" y="780" width="50" height="42" as="geometry"/>
                 </mxCell>
-                <mxCell id="r0pruG9ZnMZQPcUSS0aJ-21" value="&lt;div&gt;&amp;lt;String&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;actor:id&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="r0pruG9ZnMZQPcUSS0aJ-21" value="&lt;div&gt;&amp;lt;String&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;actor:id&lt;/div&gt;&lt;div&gt;[ts]&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="486.5" y="830" width="195" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="r0pruG9ZnMZQPcUSS0aJ-22" value="&lt;div&gt;&amp;lt;String&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;actor:id:tag:ts:ttl&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="r0pruG9ZnMZQPcUSS0aJ-22" value="&lt;div&gt;&amp;lt;String&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;actor:id:tag:ts:ttl&lt;/div&gt;&lt;div&gt;[score]&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="486.5" y="1010" width="195" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="r0pruG9ZnMZQPcUSS0aJ-24" value="&lt;div&gt;&amp;lt;Set&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;items&lt;/div&gt;&lt;div&gt;[tags]&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">

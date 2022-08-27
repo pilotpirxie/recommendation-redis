@@ -3,9 +3,13 @@ import { Router } from 'express';
 import Joi from 'joi';
 import { TypedRequest } from '../types/express';
 import validation from '../middlewares/validation';
-import { DataStorage } from '../data/dataStorage';
+import { DataStorage } from '../storage/dataStorage';
+import { RecommendationStrategy } from '../services/recommendationStrategy';
 
-export function initializeActorsController(dataStorage: DataStorage): Router {
+export function initializeActorsController(
+  dataStorage: DataStorage,
+  recommendation: RecommendationStrategy,
+): Router {
   const router = Router();
 
   const addOrReplaceActorSchema = {
@@ -85,8 +89,10 @@ export function initializeActorsController(dataStorage: DataStorage): Router {
   router.get('/:actorId/recommendation', validation(deleteOrGetActorSchema), async (req: TypedRequest<typeof deleteOrGetActorSchema>, res, next) => {
     try {
       const actor = await dataStorage.getActor(req.params.actorId);
+      if (!actor) return res.sendStatus(404);
       const items = await dataStorage.getItems();
-      return res.json({ actor, items });
+      const recommendations = await recommendation.getRecommendations(actor, items);
+      return res.json({ recommendations, actor, items });
     } catch (e) {
       return next(e);
     }
