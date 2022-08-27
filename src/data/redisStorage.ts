@@ -1,8 +1,8 @@
 import { RedisClientType } from 'redis';
-import { Actor, AddActorPayload } from './Actor';
 import { DataStorage } from './dataStorage';
-import { AddEventPayload, Event } from './event';
-import { Item } from './Item';
+import { Item } from '../domain/item';
+import { Actor } from '../domain/actor';
+import { Event } from '../domain/event';
 
 export class RedisStorage implements DataStorage {
   private redis: RedisClientType;
@@ -24,10 +24,10 @@ export class RedisStorage implements DataStorage {
     await this.redis.del(`items:${id}`);
   }
 
-  async setItem(item: Item): Promise<void> {
-    const exists = await this.redis.exists(`items:${item.itemId}`);
-    if (exists) await this.redis.del(`items:${item.itemId}`);
-    await this.redis.sAdd(`items:${item.itemId}`, item.tags);
+  async setItem(id: string, tags: string[]): Promise<void> {
+    const exists = await this.redis.exists(`items:${id}`);
+    if (exists) await this.redis.del(`items:${id}`);
+    await this.redis.sAdd(`items:${id}`, tags);
   }
 
   async getActor(id: string): Promise<Actor | null> {
@@ -73,24 +73,24 @@ export class RedisStorage implements DataStorage {
     }
   }
 
-  async setActor(actor: AddActorPayload): Promise<void> {
-    await this.deleteActor(actor.actorId);
+  async setActor(id: string): Promise<void> {
+    await this.deleteActor(id);
 
-    await this.redis.set(`actor:${actor.actorId}`, Date.now().toString());
+    await this.redis.set(`actor:${id}`, Date.now().toString());
   }
 
-  async addEvent(actorId: string, event: AddEventPayload): Promise<void> {
+  async addEvent(id: string, tag: string, score: number, ttl: number): Promise<void> {
     if (!process.env.DO_NOT_CHECK_ACTOR_EXISTENCE) {
-      const exists = await this.redis.exists(`actor:${actorId}`);
+      const exists = await this.redis.exists(`actor:${id}`);
       if (!exists) {
         return;
       }
     }
 
     const date = Date.now();
-    await this.redis.set(`actor:${actorId}:${event.tag}:${date}:${event.ttl}`, event.score);
-    if (event.ttl > 0) {
-      await this.redis.expire(`actor:${actorId}:${event.tag}:${date}:${event.ttl}`, event.ttl);
+    await this.redis.set(`actor:${id}:${tag}:${date}:${ttl}`, score);
+    if (ttl > 0) {
+      await this.redis.expire(`actor:${id}:${tag}:${date}:${ttl}`, ttl);
     }
   }
 }

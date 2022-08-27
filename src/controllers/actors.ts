@@ -16,9 +16,7 @@ export function initializeActorsController(dataStorage: DataStorage): Router {
 
   router.post('/', validation(addOrReplaceActorSchema), async (req: TypedRequest<typeof addOrReplaceActorSchema>, res, next) => {
     try {
-      await dataStorage.setActor({
-        actorId: req.body.actorId,
-      });
+      await dataStorage.setActor(req.body.actorId);
       return res.sendStatus(200);
     } catch (e) {
       return next(e);
@@ -62,11 +60,12 @@ export function initializeActorsController(dataStorage: DataStorage): Router {
 
   router.post('/:actorId/events', validation(addEventSchema), async (req: TypedRequest<typeof addEventSchema>, res, next) => {
     try {
-      const actor = await dataStorage.addEvent(req.params.actorId, {
-        tag: req.body.tag,
-        score: req.body.score,
-        ttl: req.body.ttl,
-      });
+      const actor = await dataStorage.addEvent(
+        req.params.actorId,
+        req.body.tag,
+        req.body.score,
+        req.body.ttl,
+      );
       return res.json(actor);
     } catch (e) {
       return next(e);

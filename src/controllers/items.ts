@@ -17,10 +17,7 @@ export function initializeItemsController(dataStorage: DataStorage): Router {
 
   router.post('/', validation(addOrReplaceItemSchema), async (req: TypedRequest<typeof addOrReplaceItemSchema>, res, next) => {
     try {
-      await dataStorage.setItem({
-        itemId: req.body.itemId,
-        tags: req.body.tags,
-      });
+      await dataStorage.setItem(req.body.itemId, req.body.tags);
       return res.sendStatus(200);
     } catch (e) {
       return next(e);
