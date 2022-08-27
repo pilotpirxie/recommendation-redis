@@ -26,8 +26,8 @@ export class RedisStorage implements DataStorage {
     for await (const key of this.redis.scanIterator({ MATCH: 'item:*' })) {
       const tags = await this.redis.sMembers(key);
 
-      if (process.env.VERBOSE) {
-        console.info('item:* Found ', key, tags);
+      if (process.env.VERBOSE === 'true') {
+        console.info('item:* Found', key, tags);
       }
 
       items.push({
@@ -62,8 +62,8 @@ export class RedisStorage implements DataStorage {
       const score = await this.redis.get(key);
       const [, , tag, ts, ttl] = key.split(':');
 
-      if (process.env.VERBOSE) {
-        console.info(`actor:${id}:* Found `, key, score);
+      if (process.env.VERBOSE === 'true') {
+        console.info(`actor:${id}:* Found`, key, score);
       }
 
       events.push({
@@ -94,7 +94,7 @@ export class RedisStorage implements DataStorage {
         counter++;
       }
 
-      if (process.env.VERBOSE) {
+      if (process.env.VERBOSE === 'true') {
         console.info(`actor:${id} Removed ${counter} actor key(s)`);
       }
     }
@@ -107,7 +107,7 @@ export class RedisStorage implements DataStorage {
   }
 
   async addEvent(id: string, tag: string, score: number, ttl: number): Promise<void> {
-    if (!process.env.DO_NOT_CHECK_ACTOR_EXISTENCE) {
+    if (process.env.DO_NOT_CHECK_ACTOR_EXISTENCE !== 'true') {
       const exists = await this.redis.exists(`actor:${id}`);
       if (!exists) {
         return;

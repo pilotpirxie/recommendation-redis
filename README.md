@@ -9,6 +9,7 @@ Open source recommendation system based on time-series data and statistical anal
 * Use tag score and Jaccard index
 * Content based filtering
 * Event-driven powered engine
+* Naive exploration of new tags
 * Suitable for product and content recommendation
 * Fine-tuning of tag weights
 * Minimalist and lightweight
@@ -53,11 +54,22 @@ VERBOSE="true"
 # do not check if actor exists when adding event
 DO_NOT_CHECK_ACTOR_EXISTENCE="true"
 
-# maximum number of items to calculate recommendation positions
+# maximum size of candidate pool of items to calculate recommendation positions
 ITEMS_LIMIT="100000"
 
 # maximum number of events to use for recommendation calculation
 EVENTS_LIMIT="100000"
+
+# chance of recommending irrelevant item, used for exploration of new tags
+# to minimize the recommendation bubble effect
+EXPLORATION_NOISE="0.1"
+
+# max sum of events score set per tag
+# e.g. 8 could be 1 (view event) + 2 (like event) + 5 (lead event) = 8 
+JACCARD_MAX_EVENT_SET_SCORE="8"
+
+# clamp the recommendation result between 0 and 1
+JACCARD_CLAM_RESULT_RECOMMENDATION="true"
 ```
 
 ### API
