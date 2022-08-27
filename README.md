@@ -60,6 +60,9 @@ ITEMS_LIMIT="100000"
 # maximum number of events to use for recommendation calculation
 EVENTS_LIMIT="100000"
 
+# maximum number of recommendations to return
+RECOMMENDATIONS_LIMIT=100
+
 # wait to finish event insertion before http response
 WAIT_FOR_EVENT_INSERTION="false"
 
@@ -72,7 +75,7 @@ EXPLORATION_NOISE="0.1"
 JACCARD_MAX_TAG_SCORE="8"
 
 # clamp the recommendation results between 0 and 1
-JACCARD_CLAMP_RESULTS_RECOMMENDATION="true"
+JACCARD_CLAMP_RESULT_RECOMMENDATIONS="true"
 ```
 
 ### API
