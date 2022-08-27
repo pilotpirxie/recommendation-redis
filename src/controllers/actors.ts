@@ -60,13 +60,23 @@ export function initializeActorsController(dataStorage: DataStorage): Router {
 
   router.post('/:actorId/events', validation(addEventSchema), async (req: TypedRequest<typeof addEventSchema>, res, next) => {
     try {
-      const actor = await dataStorage.addEvent(
+      if (process.env.WAIT_FOR_EVENT_INSERTION === 'true') {
+        await dataStorage.addEvent(
+          req.params.actorId,
+          req.body.tag,
+          req.body.score,
+          req.body.ttl,
+        );
+        return res.sendStatus(200);
+      }
+
+      dataStorage.addEvent(
         req.params.actorId,
         req.body.tag,
         req.body.score,
         req.body.ttl,
       );
-      return res.json(actor);
+      return res.sendStatus(200);
     } catch (e) {
       return next(e);
     }

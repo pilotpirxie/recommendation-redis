@@ -16,7 +16,7 @@ Open source recommendation system based on time-series data and statistical anal
 * Written in TypeScript and Node.js
 
 <p style="text-align: center;" align="center">
- <img src="architecture.png" style="max-width: 100%;" width="500" alt="Recommendation Architecture"/>
+ <img src="architecture.png" style="max-width: 100%;" width="400" alt="Recommendation Architecture"/>
 </p>
 
 ### Getting started
@@ -60,16 +60,19 @@ ITEMS_LIMIT="100000"
 # maximum number of events to use for recommendation calculation
 EVENTS_LIMIT="100000"
 
+# wait to finish event insertion before http response
+WAIT_FOR_EVENT_INSERTION="false"
+
 # chance of recommending irrelevant item, used for exploration of new tags
 # to minimize the recommendation bubble effect
 EXPLORATION_NOISE="0.1"
 
 # max sum of events score set per tag
-# e.g. 8 could be 1 (view event) + 2 (like event) + 5 (lead event) = 8 
+# e.g. 1 (view event) + 2 (like event) + 5 (lead event) = 8 
 JACCARD_MAX_EVENT_SET_SCORE="8"
 
-# clamp the recommendation result between 0 and 1
-JACCARD_CLAM_RESULT_RECOMMENDATION="true"
+# clamp the recommendation results between 0 and 1
+JACCARD_CLAMP_RESULTS_RECOMMENDATION="true"
 ```
 
 ### API
