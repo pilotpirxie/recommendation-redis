@@ -3,6 +3,7 @@ import { Actor } from '../domain/actor';
 
 export interface DataStorage {
     getItem(id: string): Promise<Item | null>;
+    getItems(): Promise<Item[]>;
     deleteItem(id: string): Promise<void>;
     setItem(id: string, tags: string[]): Promise<void>;
 

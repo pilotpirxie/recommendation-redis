@@ -72,5 +72,15 @@ export function initializeActorsController(dataStorage: DataStorage): Router {
     }
   });
 
+  router.get('/:actorId/recommendation', validation(deleteOrGetActorSchema), async (req: TypedRequest<typeof deleteOrGetActorSchema>, res, next) => {
+    try {
+      const actor = await dataStorage.getActor(req.params.actorId);
+      const items = await dataStorage.getItems();
+      return res.json({ actor, items });
+    } catch (e) {
+      return next(e);
+    }
+  });
+
   return router;
 }

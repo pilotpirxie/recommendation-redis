@@ -12,7 +12,7 @@ export class RedisStorage implements DataStorage {
   }
 
   async getItem(id: string): Promise<Item|null> {
-    const tags = await this.redis.sMembers(`items:${id}`);
+    const tags = await this.redis.sMembers(`item:${id}`);
     if (!tags.length) return null;
     return {
       itemId: id,
@@ -20,14 +20,32 @@ export class RedisStorage implements DataStorage {
     };
   }
 
+  async getItems(): Promise<Item[]> {
+    const items: Item[] = [];
+    for await (const key of this.redis.scanIterator({ MATCH: 'item:*' })) {
+      const tags = await this.redis.sMembers(key);
+
+      if (process.env.VERBOSE) {
+        console.info('item:* Found ', key, tags);
+      }
+
+      items.push({
+        itemId: key.split(':')[1],
+        tags,
+      });
+    }
+
+    return items;
+  }
+
   async deleteItem(id: string): Promise<void> {
-    await this.redis.del(`items:${id}`);
+    await this.redis.del(`item:${id}`);
   }
 
   async setItem(id: string, tags: string[]): Promise<void> {
-    const exists = await this.redis.exists(`items:${id}`);
-    if (exists) await this.redis.del(`items:${id}`);
-    await this.redis.sAdd(`items:${id}`, tags);
+    const exists = await this.redis.exists(`item:${id}`);
+    if (exists) await this.redis.del(`item:${id}`);
+    await this.redis.sAdd(`item:${id}`, tags);
   }
 
   async getActor(id: string): Promise<Actor | null> {
