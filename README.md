@@ -54,13 +54,9 @@ Add new event to an actor
 POST /api/actors/:actorId/events
 {
     "tag": "tag1",
-    "score": 3
+    "score": 3,
+    "ttl": 60
 }
-```
-
-Delete specific actor event by eventId
-```
-DELETE /api/actors/:actorId/events/:eventId
 ```
 
 Set (add or replace) item

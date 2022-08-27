@@ -49,5 +49,29 @@ export function initializeActorsController(dataStorage: DataStorage): Router {
     }
   });
 
+  const addEventSchema = {
+    params: {
+      actorId: Joi.string().required(),
+    },
+    body: {
+      ttl: Joi.number().required(),
+      tag: Joi.string().required(),
+      score: Joi.number().required(),
+    },
+  };
+
+  router.post('/:actorId/events', validation(addEventSchema), async (req: TypedRequest<typeof addEventSchema>, res, next) => {
+    try {
+      const actor = await dataStorage.addEvent(req.params.actorId, {
+        tag: req.body.tag,
+        score: req.body.score,
+        ttl: req.body.ttl,
+      });
+      return res.json(actor);
+    } catch (e) {
+      return next(e);
+    }
+  });
+
   return router;
 }

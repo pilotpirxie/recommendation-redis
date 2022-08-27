@@ -6,6 +6,7 @@ import { createClient, RedisClientType } from 'redis';
 import { errorHandler } from './middlewares/errors';
 import { initializeItemsController } from './controllers/items';
 import { RedisStorage } from './data/redisStorage';
+import { initializeActorsController } from './controllers/actors';
 
 dotenv.config();
 const port = process.env.PORT || 3000;
@@ -36,10 +37,11 @@ if (!redis) {
 const redisStorage = new RedisStorage(redis as RedisClientType);
 
 app.use('/api/items', initializeItemsController(redisStorage));
+app.use('/api/actors', initializeActorsController(redisStorage));
 
 app.use(errorHandler);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server is running on port ${port}`);
+  console.info(`Server is running on port ${port}`);
 });
