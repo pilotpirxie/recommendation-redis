@@ -5,7 +5,7 @@ import { Recommendation } from '../domain/recommendation';
 import { RecommendationStrategy } from './recommendationStrategy';
 
 export class JaccardIndexTags implements RecommendationStrategy {
-  async getRecommendations(actor: Actor, items: Item[]): Promise<Recommendation[]> {
+  getRecommendations(actor: Actor, items: Item[]): Recommendation[] {
     const recommendations: Recommendation[] = [];
     const maxTagScore = Number(process.env.JACCARD_MAX_TAG_SCORE) || 1;
 
@@ -14,7 +14,6 @@ export class JaccardIndexTags implements RecommendationStrategy {
       recommendations.push({
         itemId: item.itemId,
         score: jaccardIndex,
-        fromNoise: false,
       });
 
       if (process.env.VERBOSE === 'true') {

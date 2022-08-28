@@ -91,8 +91,8 @@ export function initializeActorsController(
       const actor = await dataStorage.getActor(req.params.actorId);
       if (!actor) return res.sendStatus(404);
       const items = await dataStorage.getItems();
-      const recommendations = await recommendation.getRecommendations(actor, items);
-      return res.json({ recommendations, actor, items });
+      const recommendations = recommendation.getRecommendations(actor, items);
+      return res.json(recommendations);
     } catch (e) {
       return next(e);
     }

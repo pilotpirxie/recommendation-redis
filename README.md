@@ -37,6 +37,30 @@ yarn start
 yarn dev
 ```
 
+### Tests
+To run tests use the following command:
+```sh
+yarn test
+```
+You should see the following output:
+```ts
+ PASS  src/__tests__/recommendations.spec.ts
+  Recommendations
+    √ should item 1 has score 1 and be the first (7 ms)
+    √ should item 2 has score 1 and be the first (1 ms)
+    √ should return two recommendation with the same score of 1 (1 ms)
+    √ should return two recommendation with the same score of 0.5
+    √ should return three recommendation with 1, 1 and 0.5 score
+
+ PASS  src/__tests__/envs.spec.ts
+  Envs
+    √ should return one recommendation (2 ms)
+    √ should return two recommendations
+    √ should return recommendation with 0.125 score (1 ms)
+    √ should return recommendation with 0.0625 score
+    √ should clamp results to 0
+```
+
 ### Environment variables
 ```sh
 # redis host

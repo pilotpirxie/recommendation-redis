@@ -3,5 +3,5 @@ import { Item } from '../domain/item';
 import { Recommendation } from '../domain/recommendation';
 
 export interface RecommendationStrategy {
-    getRecommendations(actor: Actor, items: Item[]): Promise<Recommendation[]>;
+    getRecommendations(actor: Actor, items: Item[]): Recommendation[];
 }
