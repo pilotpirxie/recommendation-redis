@@ -1,5 +1,5 @@
 <p style="text-align: center;" align="center">
- <img src="img/logo.png" style="max-width: 100%;" width="300" alt="Recommendation"/>
+ <img src="img/logo.png" style="max-width: 100%;" width="250" alt="Recommendation"/>
 </p>
 
 # recommendation
@@ -17,6 +17,13 @@ Open source recommendation system based on time-series data and statistical anal
 
 <p style="text-align: center;" align="center">
  <img src="img/architecture.png" style="max-width: 100%;" width="500" alt="Recommendation Architecture"/>
+</p>
+
+## Overview video
+<p style="text-align: center;" align="center">
+  <a href="https://www.youtube.com/watch?v=_m1BandnVsQ" style="text-align: center;">
+  <img src="img/thumbnail.png" style="max-width: 100%;" width="500" alt="Video"/>
+  </a>
 </p>
 
 ## How it works
@@ -74,10 +81,7 @@ yarn dev
 ## Deployment
 To make deploys work, you need to create free account on [Redis Cloud](https://redis.info/try-free-dev-to)
 
-<a href="https://heroku.com/deploy">
-  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy" width="250">
-</a>
-
+### Google Cloud Run
 <a href="https://deploy.cloud.run">
   <img src="https://deploy.cloud.run/button.svg" alt="Deploy" width="250">
 </a>
