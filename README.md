@@ -21,7 +21,7 @@ Open source recommendation system based on time-series data and statistical anal
 
 ## Overview video
 <p style="text-align: center;" align="center">
-  <a href="https://www.youtube.com/watch?v=_m1BandnVsQ" style="text-align: center;">
+  <a target="_blank" href="https://www.youtube.com/watch?v=_m1BandnVsQ" style="text-align: center;">
   <img src="img/thumbnail.png" style="max-width: 100%;" width="500" alt="Video"/>
   </a>
 </p>
