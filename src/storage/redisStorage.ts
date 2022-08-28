@@ -54,8 +54,8 @@ export class RedisStorage implements DataStorage {
   }
 
   async getActor(id: string): Promise<Actor | null> {
-    const data = await this.redis.get(`actor:${id}`);
-    if (!data) return null;
+    const exists = await this.redis.exists(`actor:${id}`);
+    if (!exists) return null;
 
     const events: Event[] = [];
     for await (const key of this.redis.scanIterator({ MATCH: `actor:${id}:*` })) {
@@ -86,17 +86,14 @@ export class RedisStorage implements DataStorage {
   }
 
   async deleteActor(id: string): Promise<void> {
-    const exists = await this.redis.exists(`actor:${id}`);
-    if (exists) {
-      let counter = 0;
-      for await (const key of this.redis.scanIterator({ MATCH: `actor:${id}*` })) {
-        await this.redis.del(key);
-        counter++;
-      }
+    let counter = 0;
+    for await (const key of this.redis.scanIterator({ MATCH: `actor:${id}*` })) {
+      await this.redis.del(key);
+      counter++;
+    }
 
-      if (process.env.VERBOSE === 'true') {
-        console.info(`actor:${id} Removed ${counter} actor key(s)`);
-      }
+    if (process.env.VERBOSE === 'true') {
+      console.info(`actor:${id} Removed ${counter} actor key(s)`);
     }
   }
 

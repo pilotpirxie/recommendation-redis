@@ -1,0 +1,29 @@
+{
+  "app_name": "Recommendation",
+  "description": "Open source recommendation system based on time-series data and statistical analysis",
+  "hidden": "false",
+  "rank": "21",
+  "type": "Full App",
+  "contributed_by": "Community",
+  "repo_url": "github.com/pilotpirxie/recommendation",
+  "download_url": "https://github.com/pilotpirxie/recommendation/archive/refs/heads/main.zip",
+  "hosted_url": "",
+  "quick_deploy": "true",
+  "deploy_buttons": [
+    {
+      "Google": "https://deploy.cloud.run/?git_repo=https://github.com/pilotpirxie/recommendation.git"
+    }
+  ],
+  "language": ["TypeScript", "JavaScript"],
+  "redis_commands": ["SADD", "EXISTS", "SMEMBERS", "SCAN", "SET", "GET", "DEL", "EXPIRE"],
+  "redis_features": ["caching"],
+  "redis_modules": [], 
+  "app_image_urls": [
+    "https://raw.githubusercontent.com/pilotpirxie/recommendation/main/img/logo.png",
+    "https://raw.githubusercontent.com/pilotpirxie/recommendation/main/img/architecture.png"
+  ], 
+  "youtube_url": "",
+  "special_tags": ["Hackathon"],
+  "verticals": ["Retail"],
+  "markdown": "https://raw.githubusercontent.com/pilotpirxie/recommendation/main/README.md"
+}
