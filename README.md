@@ -1,5 +1,5 @@
 <p style="text-align: center;" align="center">
- <img src="logo.png" style="max-width: 100%;" width="300" alt="Recommendation"/>
+ <img src="./img/logo.png" style="max-width: 100%;" width="300" alt="Recommendation"/>
 </p>
 
 # recommendation
@@ -16,7 +16,7 @@ Open source recommendation system based on time-series data and statistical anal
 * Written in TypeScript and Node.js
 
 <p style="text-align: center;" align="center">
- <img src="architecture.png" style="max-width: 100%;" width="500" alt="Recommendation Architecture"/>
+ <img src="./img/architecture.png" style="max-width: 100%;" width="500" alt="Recommendation Architecture"/>
 </p>
 
 ### Getting started
